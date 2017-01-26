@@ -1,6 +1,6 @@
 {
   "name": "opusscript",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "JS bindings for libopus 1.1.3, ported with emscripten",
   "main": "index.js",
   "repository": {
