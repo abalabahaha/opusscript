@@ -21,4 +21,7 @@ var encodedPacket = encoder.encode(pcmData, frameSize);
 
 // Decode the opus packet back into PCM
 var decodedPacket = encoder.decode(encodedPacket);
+
+// Delete the encoder when finished with it (Emscripten does not automatically call C++ object destructors)
+encoder.delete();
 ```

@@ -40,6 +40,7 @@ class OpusScriptHandler {
         ~OpusScriptHandler() {
             opus_encoder_destroy(encoder);
             opus_decoder_destroy(decoder);
+            delete out_pcm;
         }
 
         int _encode(int input_buffer, int bytes, int output_buffer, int frame_size) {
@@ -66,11 +67,16 @@ class OpusScriptHandler {
 
             return len;
         }
+
+        static void destroy_handler(OpusScriptHandler *handler) {
+            delete handler;
+        }
 };
 
 EMSCRIPTEN_BINDINGS(OpusScriptHandler) {
     class_<OpusScriptHandler>("OpusScriptHandler")
         .constructor<opus_int32, int, int>()
         .function("_encode", &OpusScriptHandler::_encode)
-        .function("_decode", &OpusScriptHandler::_decode);
+        .function("_decode", &OpusScriptHandler::_decode)
+        .class_function("destroy_handler", &OpusScriptHandler::destroy_handler, allow_raw_pointers());
 }

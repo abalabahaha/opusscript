@@ -79,6 +79,14 @@ OpusScript.prototype.decode = function decode(buffer) {
     return new Buffer(this.outPCM.subarray(0, len * this.channels * 2));
 };
 
+OpusScript.prototype.delete = function del() {
+    opusscript_native.OpusScriptHandler.destroy_handler(this.handler);
+    opusscript_native._free(this.inPCMPointer);
+    opusscript_native._free(this.inOpusPointer);
+    opusscript_native._free(this.outOpusPointer);
+    opusscript_native._free(this.outPCMPointer);
+};
+
 OpusScript.Application = OpusApplication;
 OpusScript.Error = OpusError;
 OpusScript.VALID_SAMPLING_RATES = VALID_SAMPLING_RATES;
