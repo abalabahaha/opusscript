@@ -48,15 +48,6 @@ function OpusScript(samplingRate, channels, application) {
     this.outPCM = opusscript_native.HEAPU16.subarray(this.outPCMPointer, this.outPCMPointer + this.outPCMLength);
 };
 
-OpusScript.prototype.setBitrate = function setBitrate(bitrate) {
-    this.bitrate = bitrate || 64000;
-    opusscript_native.setValue(this.bitratePointer, this.bitrate, "i32");
-    var errCode = opusscript_native._opus_encoder_ctl(this.handler, SET_BITRATE_REQUEST, this.bitratePointer);
-    if(errCode < 0) {
-        throw new Error("Failed to set bitrate: " + OpusError["" + opusscript_native.getValue(errCode, "i32")]);
-    }
-};
-
 OpusScript.prototype.encode = function encode(buffer, frameSize) {
     this.inPCM.set(buffer);
 
@@ -80,14 +71,14 @@ OpusScript.prototype.decode = function decode(buffer) {
 };
 
 OpusScript.prototype.encoderCTL = function encoderCTL(ctl, arg) {
-    var len = this.handler._opus_encoder_ctl(ctl, arg);
+    var len = this.handler._encoder_ctl(ctl, arg);
     if(len < 0) {
         throw new Error("Encoder CTL error: " + OpusError["" + len]);
     }
 };
 
 OpusScript.prototype.decoderCTL = function decoderCTL(ctl, arg) {
-    var len = this.handler._opus_decoder_ctl(ctl, arg);
+    var len = this.handler._decoder_ctl(ctl, arg);
     if(len < 0) {
         throw new Error("Decoder CTL error: " + OpusError["" + len]);
     }

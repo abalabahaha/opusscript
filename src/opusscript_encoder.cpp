@@ -68,6 +68,14 @@ class OpusScriptHandler {
             return len;
         }
 
+        int _encoder_ctl(int ctl, int arg) {
+            return opus_encoder_ctl(encoder, ctl, arg);
+        }
+
+        int _decoder_ctl(int ctl, int arg) {
+            return opus_decoder_ctl(decoder, ctl, arg);
+        }
+
         static void destroy_handler(OpusScriptHandler *handler) {
             delete handler;
         }
@@ -78,5 +86,7 @@ EMSCRIPTEN_BINDINGS(OpusScriptHandler) {
         .constructor<opus_int32, int, int>()
         .function("_encode", &OpusScriptHandler::_encode)
         .function("_decode", &OpusScriptHandler::_decode)
+        .function("_encoder_ctl", &OpusScriptHandler::_encoder_ctl)
+        .function("_decoder_ctl", &OpusScriptHandler::_decoder_ctl)
         .class_function("destroy_handler", &OpusScriptHandler::destroy_handler, allow_raw_pointers());
 }
