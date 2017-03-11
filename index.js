@@ -79,6 +79,20 @@ OpusScript.prototype.decode = function decode(buffer) {
     return new Buffer(this.outPCM.subarray(0, len * this.channels * 2));
 };
 
+OpusScript.prototype.encoderCTL = function encoderCTL(ctl, arg) {
+    var len = this.handler._opus_encoder_ctl(ctl, arg);
+    if(len < 0) {
+        throw new Error("Encoder CTL error: " + OpusError["" + len]);
+    }
+};
+
+OpusScript.prototype.decoderCTL = function decoderCTL(ctl, arg) {
+    var len = this.handler._opus_decoder_ctl(ctl, arg);
+    if(len < 0) {
+        throw new Error("Decoder CTL error: " + OpusError["" + len]);
+    }
+};
+
 OpusScript.prototype.delete = function del() {
     opusscript_native.OpusScriptHandler.destroy_handler(this.handler);
     opusscript_native._free(this.inPCMPointer);
