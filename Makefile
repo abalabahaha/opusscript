@@ -1,6 +1,6 @@
 OPUS_NATIVE_DIR=./opus-native
 
-EMCC_OPTS=-O3 --llvm-lto 1 -s NO_FILESYSTEM=1 -s ALLOW_MEMORY_GROWTH=1 --memory-init-file 0 -s EXPORTED_RUNTIME_METHODS="['setValue', 'getValue']" -s EXPORTED_FUNCTIONS="['_malloc', '_opus_strerror', '_opus_encoder_create', '_opus_encoder_ctl', '_opus_encoder_destroy', '_opus_decoder_create', '_opus_decoder_ctl', '_opus_decoder_destroy']"
+EMCC_OPTS=-O3 --llvm-lto 3 -s NO_FILESYSTEM=1 -s ALLOW_MEMORY_GROWTH=1 --memory-init-file 0 -s EXPORTED_RUNTIME_METHODS="['setValue', 'getValue']" -s EXPORTED_FUNCTIONS="['_malloc', '_opus_strerror']"
 
 all: init compile
 autogen:
