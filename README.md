@@ -1,6 +1,6 @@
 opusscript
 ==========
-### JS bindings for libopus 1.1.3, ported with emscripten
+### JS bindings for libopus 1.1.4, ported with emscripten
 
 ```js
 var opusscript = require("opusscript");
