@@ -19,5 +19,6 @@ compile:
 	mkdir -p ./build; \
 	em++ ${EMCC_OPTS} --bind src/opusscript_encoder.cpp ${OPUS_NATIVE_DIR}/.libs/libopus.a -o build/opusscript_native.js; \
     sed -i -e 's/process\["on"\]("uncaughtException",(function(ex){if(\!(ex instanceof ExitStatus)){throw ex}}));//g' build/opusscript_native.js; \
-    sed -i -e 's/cwrap=function cwrap/var cwrap=function cwrap/g' build/opusscript_native.js; \
+    sed -i -e 's/}cwrap=function cwrap/}var cwrap=function cwrap/g' build/opusscript_native.js; \
+    sed -i -e 's/require==="function"\&\&\!ENVIRONMENT_IS_WEB/require==="function"/g' build/opusscript_native.js; \
 	cp -f opus-native/COPYING build/COPYING.libopus;

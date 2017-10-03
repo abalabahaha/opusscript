@@ -20,7 +20,6 @@ var OpusError = {
 var VALID_SAMPLING_RATES = [8000, 12000, 16000, 24000, 48000];
 var MAX_FRAME_SIZE = 48000 * 60 / 1000;
 var MAX_PACKET_SIZE = 1276 * 3;
-var SET_BITRATE_REQUEST = 4002;
 
 function OpusScript(samplingRate, channels, application) {
     if(!~VALID_SAMPLING_RATES.indexOf(samplingRate)) {
