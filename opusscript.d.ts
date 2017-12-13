@@ -17,11 +17,11 @@ declare module 'opusscript' {
     type VALID_SAMPLING_RATES = 8000 | 12000 | 16000 | 24000 | 48000;
     type MAX_FRAME_SIZE = 2880;
     type MAX_PACKET_SIZE = 3828;
-    export default class OpusScript {
-        OpusApplication: typeof OpusApplication;
-        Error: typeof OpusError;
-        VALID_SAMPLING_RATES: [8000, 12000, 16000, 24000, 48000];
-        MAX_PACKET_SIZE: MAX_PACKET_SIZE;
+    class OpusScript {
+        static Application: typeof OpusApplication;
+        static Error: typeof OpusError;
+        static VALID_SAMPLING_RATES: [8000, 12000, 16000, 24000, 48000];
+        static MAX_PACKET_SIZE: MAX_PACKET_SIZE;
 
         constructor(samplingRate: VALID_SAMPLING_RATES, channels?: number, application?: OpusApplication);
         encode(buffer: Buffer, frameSize: number): Buffer;
@@ -30,4 +30,5 @@ declare module 'opusscript' {
         decoderCTL(ctl: any, arg: any): void;
         delete(): void;
     }
+    export = OpusScript;
 }
