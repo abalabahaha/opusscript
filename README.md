@@ -4,13 +4,6 @@ opusscript
 
 ```js
 var opusscript = require("opusscript");
-/*
-TypeScript:
-@code `import opusscript = require('opusscript');`
-DO NOT USE
-@code `import OpusScript from 'opusscript';`
-***the module resolves to a class and cannot be imported as so***
-*/
 
 // 48kHz sampling rate, 20ms frame duration, stereo audio (2 channels)
 var samplingRate = 48000;
@@ -32,3 +25,15 @@ var decodedPacket = encoder.decode(encodedPacket);
 // Delete the encoder when finished with it (Emscripten does not automatically call C++ object destructors)
 encoder.delete();
 ```
+
+
+### For TypeScript
+Import using
+```ts
+import opusscript = require('opusscript');
+```
+**NOT**
+```ts
+import OpusScript from 'opusscript';
+```
+***The module resolves to a class and cannot be imported as so***
