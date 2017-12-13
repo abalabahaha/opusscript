@@ -1,7 +1,19 @@
 declare module 'opusscript' {
+    /**
+     * Opus application type
+     */
     enum OpusApplication {
+        /**
+         * Voice Over IP
+         */
         VOIP = 2048,
+        /**
+         * Audio
+         */
         AUDIO = 2049,
+        /**
+         * 
+         */
         RESTRICTED_LOWDELAY = 2051
     }
     enum OpusError {
@@ -14,20 +26,53 @@ declare module 'opusscript' {
         "Invalid state" = -6,
         "Memory allocation fail" = -7
     }
+    /**
+     *  Valid audio sampling rates
+     */
     type VALID_SAMPLING_RATES = 8000 | 12000 | 16000 | 24000 | 48000;
+    /**
+     * Maximum bytes in a frame
+     */
     type MAX_FRAME_SIZE = 2880;
+    /**
+     * Maximum bytes in a packet
+     */
     type MAX_PACKET_SIZE = 3828;
     class OpusScript {
+        /**
+         * Different Opus application types
+         */
         static Application: typeof OpusApplication;
+        /**
+         * Opus Error codes
+         */
         static Error: typeof OpusError;
+        /**
+         * Array of sampling rates that Opus can use
+         */
         static VALID_SAMPLING_RATES: [8000, 12000, 16000, 24000, 48000];
+        /**
+         * The maximum size (in bytes) to send in a packet
+         */
         static MAX_PACKET_SIZE: MAX_PACKET_SIZE;
 
+        /**
+         * Create a new Opus en/decoder
+         */
         constructor(samplingRate: VALID_SAMPLING_RATES, channels?: number, application?: OpusApplication);
+        /**
+         * Encode a buffer into Opus
+         */
         encode(buffer: Buffer, frameSize: number): Buffer;
+        /**
+         * Decode an opus buffer
+         */
         decode(buffer: Buffer): Buffer;
         encoderCTL(ctl: any, arg: any): void;
         decoderCTL(ctl: any, arg: any): void;
+        /**
+         * Delete the opus object
+         */
         delete(): void;
     }
     export = OpusScript;
