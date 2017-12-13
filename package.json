@@ -3,7 +3,6 @@
   "version": "0.0.5",
   "description": "JS bindings for libopus 1.2.1, ported with emscripten",
   "main": "index.js",
-  "types": "opusscript.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/abalabahaha/opusscript.git"

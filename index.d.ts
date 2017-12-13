@@ -12,7 +12,7 @@ declare module 'opusscript' {
          */
         AUDIO = 2049,
         /**
-         * 
+         * Restricted Low-Delay
          */
         RESTRICTED_LOWDELAY = 2051
     }
@@ -27,7 +27,7 @@ declare module 'opusscript' {
         "Memory allocation fail" = -7
     }
     /**
-     *  Valid audio sampling rates
+     * Valid audio sampling rates
      */
     type VALID_SAMPLING_RATES = 8000 | 12000 | 16000 | 24000 | 48000;
     /**
