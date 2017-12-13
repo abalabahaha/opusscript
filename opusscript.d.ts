@@ -68,8 +68,8 @@ declare module 'opusscript' {
          * Decode an opus buffer
          */
         decode(buffer: Buffer): Buffer;
-        encoderCTL(ctl: any, arg: any): void;
-        decoderCTL(ctl: any, arg: any): void;
+        encoderCTL(ctl: number, arg: number): void;
+        decoderCTL(ctl: number, arg: number): void;
         /**
          * Delete the opus object
          */
