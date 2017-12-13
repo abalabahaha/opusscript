@@ -17,7 +17,7 @@ declare module 'opusscript' {
     type VALID_SAMPLING_RATES = 8000 | 12000 | 16000 | 24000 | 48000;
     type MAX_FRAME_SIZE = 2880;
     type MAX_PACKET_SIZE = 3828;
-    class OpusScript {
+    export default class OpusScript {
         OpusApplication: typeof OpusApplication;
         Error: typeof OpusError;
         VALID_SAMPLING_RATES: [8000, 12000, 16000, 24000, 48000];
@@ -30,5 +30,4 @@ declare module 'opusscript' {
         decoderCTL(ctl: any, arg: any): void;
         delete(): void;
     }
-    export = OpusScript;
 }
