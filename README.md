@@ -26,14 +26,14 @@ var decodedPacket = encoder.decode(encodedPacket);
 encoder.delete();
 ```
 
+#### TypeScript
 
-### For TypeScript
-Import using
+Since this module wasn't written for TypeScript, you need to use `import = require` syntax.
+
 ```ts
-import opusscript = require('opusscript');
-```
-**NOT**
-```ts
+// Import using:
+import OpusScript = require('opusscript');
+
+// and NOT:
 import OpusScript from 'opusscript';
 ```
-***The module resolves to a class and cannot be imported as so***
