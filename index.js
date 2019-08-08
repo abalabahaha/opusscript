@@ -1,6 +1,7 @@
 "use strict";
 
-var opusscript_native = require("./build/opusscript_native.js");
+let opusscript_native_nasm = null;
+let opusscript_native_wasm = null;
 
 var OpusApplication = {
     VOIP: 2048,
@@ -21,15 +22,30 @@ var VALID_SAMPLING_RATES = [8000, 12000, 16000, 24000, 48000];
 var MAX_FRAME_SIZE = 48000 * 60 / 1000;
 var MAX_PACKET_SIZE = 1276 * 3;
 
-function OpusScript(samplingRate, channels, application) {
+function OpusScript(samplingRate, channels, application, options) {
     if(!~VALID_SAMPLING_RATES.indexOf(samplingRate)) {
         throw new RangeError(`${samplingRate} is an invalid sampling rate.`);
     }
-    this.samplingRate = samplingRate;
+    this.options = Object.assign({
+        wasm: true
+    }, options);
 
+    this.samplingRate = samplingRate;
     this.channels = channels || 1;
     this.application = application || OpusApplication.AUDIO;
 
+    let opusscript_native = null;
+    if(this.options.wasm) {
+        if(!opusscript_native_wasm) {
+            opusscript_native_wasm = require("./build/opusscript_native_wasm.js")();
+        }
+        opusscript_native = opusscript_native_wasm;
+    } else {
+        if(!opusscript_native_nasm) {
+            opusscript_native_nasm = require("./build/opusscript_native_nasm.js")();
+        }
+        opusscript_native = opusscript_native_nasm;
+    }
     this.handler = new opusscript_native.OpusScriptHandler(this.samplingRate, this.channels, this.application);
 
     this.inPCMLength = MAX_FRAME_SIZE * this.channels * 2;
@@ -55,7 +71,7 @@ OpusScript.prototype.encode = function encode(buffer, frameSize) {
         throw new Error("Encode error: " + OpusError["" + len]);
     }
 
-    return new Buffer(this.outOpus.subarray(0, len));
+    return Buffer.from(this.outOpus.subarray(0, len));
 };
 
 OpusScript.prototype.decode = function decode(buffer) {
@@ -66,7 +82,7 @@ OpusScript.prototype.decode = function decode(buffer) {
         throw new Error("Decode error: " + OpusError["" + len]);
     }
 
-    return new Buffer(this.outPCM.subarray(0, len * this.channels * 2));
+    return Buffer.from(this.outPCM.subarray(0, len * this.channels * 2));
 };
 
 OpusScript.prototype.encoderCTL = function encoderCTL(ctl, arg) {
@@ -84,6 +100,7 @@ OpusScript.prototype.decoderCTL = function decoderCTL(ctl, arg) {
 };
 
 OpusScript.prototype.delete = function del() {
+    let opusscript_native = this.options.wasm ? opusscript_native_wasm : opusscript_native_nasm;
     opusscript_native.OpusScriptHandler.destroy_handler(this.handler);
     opusscript_native._free(this.inPCMPointer);
     opusscript_native._free(this.inOpusPointer);

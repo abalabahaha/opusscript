@@ -10,9 +10,7 @@ using namespace emscripten;
 
 class OpusScriptHandler {
     private:
-        int application;
         int channels;
-        opus_int32 sampling_rate;
 
         OpusEncoder* encoder;
         OpusDecoder* decoder;
@@ -20,7 +18,7 @@ class OpusScriptHandler {
         opus_int16* out_pcm;
     public:
         OpusScriptHandler(opus_int32 sampling_rate, int channels, int application):
-            sampling_rate(sampling_rate), channels(channels), application(application) {
+            channels(channels) {
 
             out_pcm = new opus_int16[MAX_FRAME_SIZE * channels * 2];
 
