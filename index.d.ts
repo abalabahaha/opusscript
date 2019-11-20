@@ -38,6 +38,15 @@ declare module 'opusscript' {
      * Maximum bytes in a packet
      */
     type MAX_PACKET_SIZE = 3828;
+    /**
+     * Constructor options for OpusScript
+     */
+    interface OpusScriptOptions {
+        /**
+         * Whether or not to use the WASM-compiled version of OpusScript. This is true by default.
+         */
+        wasm?: boolean;
+    }
     class OpusScript {
         /**
          * Different Opus application types
@@ -57,9 +66,14 @@ declare module 'opusscript' {
         static MAX_PACKET_SIZE: MAX_PACKET_SIZE;
 
         /**
+         * OpusScript options being used
+         */
+        options: OpusScriptOptions;
+
+        /**
          * Create a new Opus en/decoder
          */
-        constructor(samplingRate: VALID_SAMPLING_RATES, channels?: number, application?: OpusApplication);
+        constructor(samplingRate: VALID_SAMPLING_RATES, channels?: number, application?: OpusApplication, options?: OpusScriptOptions);
         /**
          * Encode a buffer into Opus
          */
