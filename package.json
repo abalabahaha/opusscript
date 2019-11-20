@@ -17,5 +17,9 @@
   "bugs": {
     "url": "https://github.com/abalabahaha/opusscript/issues"
   },
-  "homepage": "https://github.com/abalabahaha/opusscript#readme"
+  "homepage": "https://github.com/abalabahaha/opusscript#readme",
+  "browser": {
+    "fs": false,
+    "path": false
+  }
 }
