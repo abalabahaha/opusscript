@@ -92,6 +92,10 @@ OpusScript.prototype.encoderCTL = function encoderCTL(ctl, arg) {
     }
 };
 
+OpusScript.prototype.encoderBitRate = function encoderBitRate(val) {
+    this.encoderCTL(4002, val);
+};
+
 OpusScript.prototype.decoderCTL = function decoderCTL(ctl, arg) {
     var len = this.handler._decoder_ctl(ctl, arg);
     if(len < 0) {
