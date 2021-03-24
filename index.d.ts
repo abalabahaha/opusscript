@@ -82,6 +82,10 @@ declare module 'opusscript' {
          * Decode an opus buffer
          */
         decode(buffer: Buffer): Buffer;
+        /**
+         * Encoder/decoder parameters
+         */
+        encoderBitRate(val: number): void;
         encoderCTL(ctl: number, arg: number): void;
         decoderCTL(ctl: number, arg: number): void;
         /**
