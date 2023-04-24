@@ -83,9 +83,12 @@ declare module 'opusscript' {
          */
         decode(buffer: Buffer): Buffer;
         /**
+         * Set the encoder bitrate
+         */
+        setBitrate(bitrate: number): void;
+        /**
          * Encoder/decoder parameters
          */
-        encoderBitRate(val: number): void;
         encoderCTL(ctl: number, arg: number): void;
         decoderCTL(ctl: number, arg: number): void;
         /**
