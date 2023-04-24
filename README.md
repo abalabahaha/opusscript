@@ -1,6 +1,6 @@
 # OpusScript
 
-JS bindings for libopus 1.3.1, ported with Emscripten.
+JS bindings for libopus 1.4, ported with Emscripten.
 
 ----
 
