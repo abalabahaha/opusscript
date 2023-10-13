@@ -7,7 +7,10 @@ JS bindings for libopus 1.4, ported with Emscripten.
 ## Usage
 
 ```js
-var OpusScript = require("opusscript");
+//on commonjs
+var OpusScript = require("opusscript").default;
+//on ESM and TS
+import OpusScript from "opusscript";
 
 // 48kHz sampling rate, 20ms frame duration, stereo audio (2 channels)
 var samplingRate = 48000;
@@ -38,16 +41,4 @@ If your environment doesn't support WASM, you can try the JS-only module. Do not
 var encoder = new OpusScript(samplingRate, channels, OpusScript.Application.AUDIO, {
   wasm: false
 });
-```
-
-## Note: TypeScript
-
-Since this module wasn't written for TypeScript, you need to use `import = require` syntax.
-
-```ts
-// Import using:
-import OpusScript = require("opusscript");
-
-// and NOT:
-import OpusScript from "opusscript";
 ```

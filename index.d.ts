@@ -96,5 +96,5 @@ declare module 'opusscript' {
          */
         delete(): void;
     }
-    export = OpusScript;
+    export default OpusScript;
 }

@@ -117,4 +117,4 @@ OpusScript.Error = OpusError;
 OpusScript.VALID_SAMPLING_RATES = VALID_SAMPLING_RATES;
 OpusScript.MAX_PACKET_SIZE = MAX_PACKET_SIZE;
 
-module.exports = OpusScript;
+module.exports.default = OpusScript;
